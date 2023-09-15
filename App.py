@@ -35,6 +35,7 @@ handler = WebhookHandler(config.get('line_bot', 'Channel_Secret'))
 line_bot_api = MessagingApi(api_client)
 
 @app.route("/callback", methods=['POST'])
+#def callback(request): //google cloud function entry point
 def callback():
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
@@ -66,6 +67,6 @@ def handle_message(event):
             messages=[TextMessage(text=event.message.text)]
         )
     )
-
+    
 if __name__ == "__main__":
     app.run(debug=True,port=8000)
